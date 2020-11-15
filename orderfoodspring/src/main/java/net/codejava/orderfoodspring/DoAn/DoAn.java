@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Food{
+public class DoAn{
     private Integer mamon;
     private Integer macuahang;
 	private String tenmon;
@@ -17,10 +17,10 @@ public class Food{
 	private String dvt;
     private Integer maloai;
 
-    public Food() {
+    public DoAn() {
     }
 
-    public Food(Integer mamon, Integer macuahang, String tenmon, Float gia, String anh, Float giakhuyenmai, String mota, String dvt, Integer maloai) {
+    public DoAn(Integer mamon, Integer macuahang, String tenmon, Float gia, String anh, Float giakhuyenmai, String mota, String dvt, Integer maloai) {
         this.mamon = mamon;
         this.macuahang = macuahang;
         this.tenmon = tenmon;

@@ -17,35 +17,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FoodController {
+public class DoAnController {
     @Autowired
-    private FoodService service;
+    private DoAnService service;
 
     @PostMapping("/foods")
-    public void add(@RequestBody Food food) {
+    public void add(@RequestBody DoAn food) {
         service.save(food);
     }
 
     @GetMapping("/foods")
-    public List<Food> list(){
+    public List<DoAn> list(){
         return service.listAll();
     }
 
     @GetMapping("/foods/{id}")
-    public ResponseEntity<Food> get(@PathVariable Integer id){
+    public ResponseEntity<DoAn> get(@PathVariable Integer id){
         try {
-            Food food = service.get(id);
-            return new ResponseEntity<Food>(food, HttpStatus.OK);
+            DoAn food = service.get(id);
+            return new ResponseEntity<DoAn>(food, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             //TODO: handle exception
-            return new ResponseEntity<Food>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<DoAn>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/foods/{id}")
-    public ResponseEntity<?> update(@RequestBody Food food, @PathVariable Integer id) {
+    public ResponseEntity<?> update(@RequestBody DoAn food, @PathVariable Integer id) {
         try {
-            Food existFood = service.get(id);
+            DoAn existFood = service.get(id);
             service.save(food);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {

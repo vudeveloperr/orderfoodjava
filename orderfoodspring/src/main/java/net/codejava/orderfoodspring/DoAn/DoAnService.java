@@ -7,20 +7,20 @@ import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FoodService {
+public class DoAnService {
     
     @Autowired
-    private FoodRepository repo;
+    private DoAnRepository repo;
 
-    public List<Food> listAll(){
+    public List<DoAn> listAll(){
         return repo.findAll();
     }
 
-    public void save(Food food){
+    public void save(DoAn food){
         repo.save(food);
     }
 
-    public Food get(Integer id){
+    public DoAn get(Integer id){
         return repo.findById(id).get();
     }
 
