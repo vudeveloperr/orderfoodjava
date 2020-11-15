@@ -1,59 +1,58 @@
-package net.codejava.orderfoodspring;
+package net.codejava.orderfoodspring.Donhang;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import javax.persistence.Entity;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DoAnController {
+public class DonhangController {
+    
     @Autowired
-    private DoAnService service;
+    private DonhangService service;
 
-    @PostMapping("/foods")
-    public void add(@RequestBody DoAn food) {
-        service.save(food);
+    @PostMapping("/orders")
+    public void add(@RequestBody Donhang donhang) {
+        service.save(donhang);
     }
 
-    @GetMapping("/foods")
-    public List<DoAn> list(){
+    @GetMapping("/orders")
+    public List<Donhang> list(){
         return service.listAll();
     }
 
-    @GetMapping("/foods/{id}")
-    public ResponseEntity<DoAn> get(@PathVariable Integer id){
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<Donhang> get(@PathVariable Integer id){
         try {
-            DoAn food = service.get(id);
-            return new ResponseEntity<DoAn>(food, HttpStatus.OK);
+            Donhang donhang = service.get(id);
+            return new ResponseEntity<Donhang>(donhang, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             //TODO: handle exception
-            return new ResponseEntity<DoAn>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Donhang>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/foods/{id}")
-    public ResponseEntity<?> update(@RequestBody DoAn food, @PathVariable Integer id) {
+    @PutMapping("/orders/{id}")
+    public ResponseEntity<?> update(@RequestBody Donhang donhang, @PathVariable Integer id) {
         try {
-            DoAn existFood = service.get(id);
-            service.save(food);
+            Donhang existDonhang = service.get(id);
+            service.save(donhang);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }      
     }
 
-    @DeleteMapping("/foods/{id}")
+    @DeleteMapping("/orders/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
