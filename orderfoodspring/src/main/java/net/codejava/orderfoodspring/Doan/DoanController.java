@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import net.codejava.orderfoodspring.Exception.CustomException;
 
 @RestController
 public class DoanController {
@@ -31,24 +35,31 @@ public class DoanController {
 
     @GetMapping("/foods/{id}")
     public ResponseEntity<Doan> get(@PathVariable Integer id){
-        try {
+        boolean check = service.exists(id);
+        if (check){
             Doan food = service.get(id);
             return new ResponseEntity<Doan>(food, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            //TODO: handle exception
-            return new ResponseEntity<Doan>(HttpStatus.NOT_FOUND);
+        }else{
+            throw new DoanException("food not found!!!");
         }
+    }
+
+    @ExceptionHandler(DoanException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Food not found")
+    public void handlerNilException(DoanException e){
+        System.out.println(e.getMessage());  
     }
 
     @PutMapping("/foods/{id}")
     public ResponseEntity<?> update(@RequestBody Doan food, @PathVariable Integer id) {
-        try {
-            Doan existFood = service.get(id);
+        boolean check = service.exists(id);
+        if (check){
             service.save(food);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }      
+            return new ResponseEntity<Doan>(food, HttpStatus.OK);
+        }else{
+            DoanException ex = new DoanException("food not found!!!");
+            return CustomException.handleFoodNotFoundException(ex);
+        }    
     }
 
     @DeleteMapping("/foods/{id}")
