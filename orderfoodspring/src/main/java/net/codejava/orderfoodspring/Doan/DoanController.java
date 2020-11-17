@@ -1,7 +1,6 @@
 package net.codejava.orderfoodspring.Doan;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +56,7 @@ public class DoanController {
             service.save(food);
             return new ResponseEntity<Doan>(food, HttpStatus.OK);
         }else{
-            DoanException ex = new DoanException("food not found!!!");
+            DoanException ex = new DoanException("food not found(1)!");
             return CustomException.handleFoodNotFoundException(ex);
         }    
     }

@@ -3,6 +3,9 @@ package net.codejava.orderfoodspring.Donhang;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javassist.NotFoundException;
 
 @RestController
 public class DonhangController {
@@ -31,13 +36,13 @@ public class DonhangController {
     }
 
     @GetMapping("/orders/{id}")
-    public ResponseEntity<Donhang> get(@PathVariable Integer id){
-        try {
-            Donhang donhang = service.get(id);
-            return new ResponseEntity<Donhang>(donhang, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            //TODO: handle exception
-            return new ResponseEntity<Donhang>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> get(@PathVariable Integer id){
+        boolean check = service.exists(id);
+        if (check){
+            Donhang or = service.get(id);
+            return new ResponseEntity<Donhang>(or, HttpStatus.OK);
+        }else{
+            return null;
         }
     }
 
