@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.*;
 
 @Entity
+@XmlRootElement
 public class DoAn{
     private Integer mamon;
     private Integer macuahang;
@@ -33,6 +35,7 @@ public class DoAn{
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlElement
     public Integer getMamon() {
         return this.mamon;
     }
@@ -40,7 +43,7 @@ public class DoAn{
     public void setMamon(Integer mamon) {
         this.mamon = mamon;
     }
-
+    @XmlElement
     public Integer getMacuahang() {
         return this.macuahang;
     }
@@ -48,7 +51,7 @@ public class DoAn{
     public void setMacuahang(Integer macuahang) {
         this.macuahang = macuahang;
     }
-
+    @XmlElement
     public String getTenmon() {
         return this.tenmon;
     }
@@ -56,7 +59,7 @@ public class DoAn{
     public void setTenmon(String tenmon) {
         this.tenmon = tenmon;
     }
-
+    @XmlElement
     public Float getGia() {
         return this.gia;
     }
@@ -64,7 +67,7 @@ public class DoAn{
     public void setGia(Float gia) {
         this.gia = gia;
     }
-
+    @XmlElement
     public String getAnh() {
         return this.anh;
     }
@@ -72,7 +75,7 @@ public class DoAn{
     public void setAnh(String anh) {
         this.anh = anh;
     }
-
+    @XmlElement
     public Float getGiakhuyenmai() {
         return this.giakhuyenmai;
     }
@@ -80,7 +83,7 @@ public class DoAn{
     public void setGiakhuyenmai(Float giakhuyenmai) {
         this.giakhuyenmai = giakhuyenmai;
     }
-
+    @XmlElement
     public String getMota() {
         return this.mota;
     }
@@ -88,7 +91,7 @@ public class DoAn{
     public void setMota(String mota) {
         this.mota = mota;
     }
-
+    @XmlElement
     public String getDvt() {
         return this.dvt;
     }
@@ -96,7 +99,7 @@ public class DoAn{
     public void setDvt(String dvt) {
         this.dvt = dvt;
     }
-
+    @XmlElement
     public Integer getMaloai() {
         return this.maloai;
     }

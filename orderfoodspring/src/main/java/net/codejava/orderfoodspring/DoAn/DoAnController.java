@@ -27,8 +27,8 @@ public class DoAnController {
     }
 
     @GetMapping("/foods")
-    public List<DoAn> list(){
-        return service.listAll();
+    public DoAn list(){
+        return new DoAn(1, 1, "com rang", new Float("10"), "null", new Float("10"), "day la mon com rang", "xuat", 1);
     }
 
     @GetMapping("/foods/{id}")
