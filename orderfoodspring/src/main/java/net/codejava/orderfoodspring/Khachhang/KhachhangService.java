@@ -1,26 +1,25 @@
-package net.codejava.orderfoodspring;
+package net.codejava.orderfoodspring.Khachhang;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DoAnService {
+public class KhachhangService {
     
     @Autowired
-    private DoAnRepository repo;
+    private KhachhangRepository repo;
 
-    public List<DoAn> listAll(){
+    public List<Khachhang> listAll(){
         return repo.findAll();
     }
 
-    public void save(DoAn food){
+    public void save(Khachhang food){
         repo.save(food);
     }
 
-    public DoAn get(Integer id){
+    public Khachhang get(Integer id){
         return repo.findById(id).get();
     }
 

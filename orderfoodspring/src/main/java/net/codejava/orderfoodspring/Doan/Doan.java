@@ -1,4 +1,4 @@
-package net.codejava.orderfoodspring;
+package net.codejava.orderfoodspring.Doan;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,27 +6,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class DoAn{
+public class Doan{
     private Integer mamon;
-    private Integer macuahang;
 	private String tenmon;
 	private Float gia;
     private String anh;
-    private Float giakhuyenmai;
 	private String mota;
 	private String dvt;
     private Integer maloai;
 
-    public DoAn() {
+    public Doan() {
     }
 
-    public DoAn(Integer mamon, Integer macuahang, String tenmon, Float gia, String anh, Float giakhuyenmai, String mota, String dvt, Integer maloai) {
+    public Doan(Integer mamon, String tenmon, Float gia, String anh, String mota, String dvt, Integer maloai) {
         this.mamon = mamon;
-        this.macuahang = macuahang;
         this.tenmon = tenmon;
         this.gia = gia;
         this.anh = anh;
-        this.giakhuyenmai = giakhuyenmai;
         this.mota = mota;
         this.dvt = dvt;
         this.maloai = maloai;
@@ -39,14 +35,6 @@ public class DoAn{
 
     public void setMamon(Integer mamon) {
         this.mamon = mamon;
-    }
-
-    public Integer getMacuahang() {
-        return this.macuahang;
-    }
-
-    public void setMacuahang(Integer macuahang) {
-        this.macuahang = macuahang;
     }
 
     public String getTenmon() {
@@ -71,14 +59,6 @@ public class DoAn{
 
     public void setAnh(String anh) {
         this.anh = anh;
-    }
-
-    public Float getGiakhuyenmai() {
-        return this.giakhuyenmai;
-    }
-
-    public void setGiakhuyenmai(Float giakhuyenmai) {
-        this.giakhuyenmai = giakhuyenmai;
     }
 
     public String getMota() {
