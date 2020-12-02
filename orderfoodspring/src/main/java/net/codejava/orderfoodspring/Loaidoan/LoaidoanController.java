@@ -21,35 +21,35 @@ public class LoaidoanController {
     private LoaidoanService service;
 
     @PostMapping("/types")
-    public void add(@RequestBody Loaidoan loaidoan){
+    public void add(@RequestBody Loaidoan loaidoan) {
         service.save(loaidoan);
     }
 
     @GetMapping("/types")
-    public List<Loaidoan> list(){
-        return service.listAll();  
+    public List<Loaidoan> list() {
+        return service.listAll();
     }
 
     @GetMapping("/types/{maloai}")
     public ResponseEntity<Loaidoan> get(@PathVariable Integer maloai) {
-        try {
+        boolean check = service.exists(maloai);
+        if (check) {
             Loaidoan lda = service.get(maloai);
             return new ResponseEntity<Loaidoan>(lda, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            //TODO: handle exception
+        } else {
             return new ResponseEntity<Loaidoan>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/types/{maloai}")
     public ResponseEntity<?> update(@RequestBody Loaidoan lda, @PathVariable Integer maloai) {
-        try {
-            Loaidoan existLda = service.get(maloai);
+        boolean check = service.exists(maloai);
+        if (check) {
             service.save(lda);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }      
+        }
     }
 
     @DeleteMapping("/types/{maloai}")

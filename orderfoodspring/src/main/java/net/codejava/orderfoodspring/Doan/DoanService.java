@@ -30,4 +30,16 @@ public class DoanService {
     public boolean exists(Integer id){
         return repo.existsById(id);
     }
+
+    public List<Doan> lists(int num){
+        return repo.listsRand(num);
+    }
+
+    public List<Doan> listsFillerType(int num, int idtype){
+        return repo.listsFillterType(num, idtype);
+    }
+
+    public List<Doan> listsFillerTypeAll(int idtype){
+        return repo.listsFillterTypeAll(idtype);
+    }
 }

@@ -26,4 +26,8 @@ public class LoaidoanService {
     public void delete(int id) {
         repo.deleteById(id);
     }
+
+    public boolean exists(Integer id){
+        return repo.existsById(id);
+    }
 }

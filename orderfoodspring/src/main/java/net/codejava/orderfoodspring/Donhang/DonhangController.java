@@ -48,13 +48,13 @@ public class DonhangController {
 
     @PutMapping("/orders/{id}")
     public ResponseEntity<?> update(@RequestBody Donhang donhang, @PathVariable Integer id) {
-        try {
-            Donhang existDonhang = service.get(id);
+        boolean check = service.exists(id);
+        if (check){
             service.save(donhang);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (NoSuchElementException e) {
+        }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }      
+        }  
     }
 
     @DeleteMapping("/orders/{id}")
