@@ -13,7 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 
+import net.codejava.orderfoodspring.Auth.security.cors.CorsFilter;
 import net.codejava.orderfoodspring.Auth.security.jwt.AuthEntryPointJwt;
 import net.codejava.orderfoodspring.Auth.security.jwt.AuthTokenFilter;
 import net.codejava.orderfoodspring.Auth.security.services.UserDetailsServiceImpl;
@@ -71,15 +73,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Bean
+    CorsFilter corsFilter() {
+        CorsFilter filter = new CorsFilter();
+        return filter;
+    }
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
+		http.csrf().disable()
+			.addFilterBefore(corsFilter(), SessionManagementFilter.class) //adds your custom CorsFilter
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/test/**").permitAll()
+			.antMatchers("/foods/**").permitAll()
+            .antMatchers("/orders/**").permitAll()
+            .antMatchers("/types/**").permitAll()
 			.anyRequest().authenticated();
+			
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
