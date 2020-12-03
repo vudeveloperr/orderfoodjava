@@ -23,6 +23,10 @@ public class Donhang {
         this.tranthai = tranthai;
     }
 
+    public Donhang(){
+        
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getMadon() {

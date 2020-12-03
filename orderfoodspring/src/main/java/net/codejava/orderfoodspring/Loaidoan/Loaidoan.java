@@ -12,6 +12,10 @@ public class Loaidoan {
         this.tenloai = tenloai;
     }
 
+    public Loaidoan(){
+        
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getmaloai() {
