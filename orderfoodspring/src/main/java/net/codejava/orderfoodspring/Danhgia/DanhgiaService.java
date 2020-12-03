@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.codejava.orderfoodspring.Response.DanhgiaRes;
+
 @Service
 public class DanhgiaService {
     @Autowired
@@ -14,7 +16,7 @@ public class DanhgiaService {
         repo.save(danhgia);
     }
 
-    public List<Danhgia> getall(int id, int mamon){
+    public List<DanhgiaRes> getall(int id, int mamon){
         return repo.lists(id, mamon);
     }
 }

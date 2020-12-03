@@ -1,10 +1,7 @@
 package net.codejava.orderfoodspring.Danhgia;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
-import java.util.Optional;
 
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.codejava.orderfoodspring.Request.DanhgiaReq;
 import net.codejava.orderfoodspring.Response.DanhgiaRes;
 
 @RestController
@@ -20,7 +18,7 @@ public class DanhgiaController {
     private DanhgiaService service;
 
     @PostMapping("/comments")
-    public void add(@RequestBody DanhgiaRes res) {
+    public void add(@RequestBody DanhgiaReq res) {
         Danhgia danhgia = new Danhgia();
         danhgia.setId(res.getId());
         danhgia.setMamon(res.getMamon());
@@ -32,7 +30,7 @@ public class DanhgiaController {
     }
 
     @GetMapping("/comments")
-    public List<Danhgia> lists(@RequestParam(required = true) Integer id ,@RequestParam(required = true) Integer mamon){
+    public List<DanhgiaRes> lists(@RequestParam(required = true) Integer id ,@RequestParam(required = true) Integer mamon){
         return service.getall(id, mamon);
     }
 

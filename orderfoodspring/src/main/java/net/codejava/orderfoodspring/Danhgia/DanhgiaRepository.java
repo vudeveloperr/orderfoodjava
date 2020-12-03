@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import net.codejava.orderfoodspring.Response.DanhgiaRes;
+
 @Repository
 public interface DanhgiaRepository extends JpaRepository<Danhgia, Integer> {
 
-    @Query(value = "select * from danhgia where id = ?1 and mamon = ?2 order by ngaytao DESC  ", nativeQuery = true)
-    List<Danhgia> lists(int id, int mamon);
+    @Query(value = "select users.username as ten, danhgia.noidung, danhgia.ngaytao from danhgia join users on users.id = danhgia.id where danhgia.id = ?1 and danhgia.mamon = ?2 order by danhgia.ngaytao DESC  ", nativeQuery = true)
+    List<DanhgiaRes> lists(int id, int mamon);
 }
