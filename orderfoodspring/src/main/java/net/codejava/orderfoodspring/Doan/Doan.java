@@ -14,11 +14,12 @@ public class Doan{
 	private String mota;
 	private String dvt;
     private Integer maloai;
+    private String trangthai;
 
     public Doan() {
     }
 
-    public Doan(Integer mamon, String tenmon, Float gia, String anh, String mota, String dvt, Integer maloai) {
+    public Doan(Integer mamon, String tenmon, Float gia, String anh, String mota, String dvt, Integer maloai, String trangthai) {
         this.mamon = mamon;
         this.tenmon = tenmon;
         this.gia = gia;
@@ -26,6 +27,7 @@ public class Doan{
         this.mota = mota;
         this.dvt = dvt;
         this.maloai = maloai;
+        this.trangthai = trangthai;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,6 +85,14 @@ public class Doan{
 
     public void setMaloai(Integer maloai) {
         this.maloai = maloai;
+    }
+
+    public String getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(String trangthai) {
+        this.trangthai = trangthai;
     }
 	
 }

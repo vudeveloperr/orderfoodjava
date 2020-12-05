@@ -1,5 +1,7 @@
 package net.codejava.orderfoodspring.Donhang;
 
+import java.math.BigInteger;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,21 +12,25 @@ public class Donhang {
     private String sdt;
     private String diachi;
     private float tongtien;
-    private String tranthai;
+    private String ghichu;
+    private String diachinhan;
+    private BigInteger thoigiannhan;
+    private BigInteger thoigiandat;
+
+    public Donhang(){}
 
     public Donhang(Integer madon, Integer makhach, String tenkhach, String sdt, String diachi, float tongtien,
-            String tranthai) {
+            String ghichu, String diachinhan, BigInteger thoigiannhan, BigInteger thoigiandat) {
         this.madon = madon;
         this.makhach = makhach;
         this.tenkhach = tenkhach;
         this.sdt = sdt;
         this.diachi = diachi;
         this.tongtien = tongtien;
-        this.tranthai = tranthai;
-    }
-
-    public Donhang(){
-        
+        this.ghichu = ghichu;
+        this.diachinhan = diachinhan;
+        this.thoigiannhan = thoigiannhan;
+        this.thoigiandat = thoigiandat;
     }
 
     @Id
@@ -77,11 +83,35 @@ public class Donhang {
         this.tongtien = tongtien;
     }
 
-    public String getTranthai() {
-        return tranthai;
+    public String getGhichu() {
+        return ghichu;
     }
 
-    public void setTranthai(String tranthai) {
-        this.tranthai = tranthai;
+    public void setGhichu(String ghichu) {
+        this.ghichu = ghichu;
+    }
+
+    public String getDiachinhan() {
+        return diachinhan;
+    }
+
+    public void setDiachinhan(String diachinhan) {
+        this.diachinhan = diachinhan;
+    }
+
+    public BigInteger getThoigiannhan() {
+        return thoigiannhan;
+    }
+
+    public void setThoigiannhan(BigInteger thoigiannhan) {
+        this.thoigiannhan = thoigiannhan;
+    }
+
+    public BigInteger getThoigiandat() {
+        return thoigiandat;
+    }
+
+    public void setThoigiandat(BigInteger thoigiandat) {
+        this.thoigiandat = thoigiandat;
     }
 }

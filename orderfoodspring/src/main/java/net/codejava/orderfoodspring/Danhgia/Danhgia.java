@@ -1,6 +1,5 @@
 package net.codejava.orderfoodspring.Danhgia;
 
-import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +12,9 @@ public class Danhgia {
     private int id;
     private int mamon;
     private String noidung;
-    private Date ngaytao;
+    private Long ngaytao;
 
-    public Danhgia(int index, int id, int mamon, String noidung, Date ngaytao) {
+    public Danhgia(int index, int id, int mamon, String noidung, Long ngaytao) {
         this.index = index;
         this.id = id;
         this.mamon = mamon;
@@ -59,11 +58,11 @@ public class Danhgia {
         this.noidung = noidung;
     }
 
-    public Date getNgaytao() {
+    public Long getNgaytao() {
         return ngaytao;
     }
 
-    public void setNgaytao(Date ngaytao) {
+    public void setNgaytao(Long ngaytao) {
         this.ngaytao = ngaytao;
     }
 }

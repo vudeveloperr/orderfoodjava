@@ -23,10 +23,6 @@ public class DonhangService {
         return repo.findById(id).get();
     }
 
-    public void delete(Integer id){
-        repo.deleteById(id);
-    }
-
     public boolean exists(Integer id){
         return repo.existsById(id);
     }

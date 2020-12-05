@@ -16,7 +16,7 @@ public class DanhgiaService {
         repo.save(danhgia);
     }
 
-    public List<DanhgiaRes> getall(int id, int mamon){
-        return repo.lists(id, mamon);
+    public List<DanhgiaRes> getall(int mamon){
+        return repo.lists(mamon);
     }
 }

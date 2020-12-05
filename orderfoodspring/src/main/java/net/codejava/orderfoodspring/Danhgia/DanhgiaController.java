@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import net.codejava.orderfoodspring.Request.DanhgiaReq;
 import net.codejava.orderfoodspring.Response.DanhgiaRes;
 
+import java.sql.Timestamp;
+
 @RestController
 public class DanhgiaController {
     @Autowired
@@ -23,15 +25,14 @@ public class DanhgiaController {
         danhgia.setId(res.getId());
         danhgia.setMamon(res.getMamon());
         danhgia.setNoidung(res.getNoidung());
-        long millis=System.currentTimeMillis();  
-        java.sql.Date date=new java.sql.Date(millis); 
-        danhgia.setNgaytao(date);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        danhgia.setNgaytao(timestamp.getTime());
         service.save(danhgia);
     }
 
     @GetMapping("/comments")
-    public List<DanhgiaRes> lists(@RequestParam(required = true) Integer id ,@RequestParam(required = true) Integer mamon){
-        return service.getall(id, mamon);
+    public List<DanhgiaRes> lists(@RequestParam(required = true) Integer mamon){
+        return service.getall(mamon);
     }
 
 }
