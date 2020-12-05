@@ -11,7 +11,7 @@ public class Donhang {
     private String tenkhach;
     private String sdt;
     private String diachi;
-    private float tongtien;
+    private Long tongtien;
     private String ghichu;
     private String diachinhan;
     private BigInteger thoigiannhan;
@@ -19,7 +19,7 @@ public class Donhang {
 
     public Donhang(){}
 
-    public Donhang(Integer madon, Integer makhach, String tenkhach, String sdt, String diachi, float tongtien,
+    public Donhang(Integer madon, Integer makhach, String tenkhach, String sdt, String diachi, Long tongtien,
             String ghichu, String diachinhan, BigInteger thoigiannhan, BigInteger thoigiandat) {
         this.madon = madon;
         this.makhach = makhach;
@@ -75,11 +75,11 @@ public class Donhang {
         this.diachi = diachi;
     }
 
-    public float getTongtien() {
+    public Long getTongtien() {
         return tongtien;
     }
 
-    public void setTongtien(float tongtien) {
+    public void setTongtien(Long tongtien) {
         this.tongtien = tongtien;
     }
 
