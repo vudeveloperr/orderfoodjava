@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import net.codejava.orderfoodspring.Response.DoanRes;
+
 @Repository
 public interface DoanRepository extends JpaRepository<Doan, Integer>{
     
@@ -17,4 +19,7 @@ public interface DoanRepository extends JpaRepository<Doan, Integer>{
 
     @Query(value = "Select * from doan where maloai = ?1", nativeQuery = true)
     List<Doan> listsFillterTypeAll(int idtype);
+
+    @Query(value = "select tenmon, gia, anh, trangthai from doan", nativeQuery = true)
+    List<DoanRes> listView();
 }

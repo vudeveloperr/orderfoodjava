@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.codejava.orderfoodspring.Loaidoan.LoaidoanService;
+import net.codejava.orderfoodspring.Response.DoanRes;
 
 @RestController
 public class DoanController {
@@ -59,6 +60,12 @@ public class DoanController {
                 }
             }
         }
+    }
+
+    // get list view
+    @GetMapping("/foods/view")
+    public List<DoanRes> listView(){
+        return service.listView();
     }
 
     // get by id

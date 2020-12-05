@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.codejava.orderfoodspring.Response.DoanRes;
+
 @Service
 public class DoanService {
     
@@ -41,5 +43,9 @@ public class DoanService {
 
     public List<Doan> listsFillerTypeAll(int idtype){
         return repo.listsFillterTypeAll(idtype);
+    }
+    
+    public List<DoanRes> listView(){
+        return repo.listView();
     }
 }
