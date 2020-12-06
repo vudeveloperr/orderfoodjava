@@ -14,13 +14,12 @@ public interface DonhangRepository extends JpaRepository<Donhang, Integer> {
     @Query(value = "select donhang.madon ,donhang.makhach, "+
     "donhang.thoigiandat,donhang.thoigiannhan, "+
     "datdoan.soluong, doan.tenmon,doan.gia,doan.anh "+
-    "from donhang,datdoan,doan, trangthaidonhang, trangthai "+
-    "where doan.mamon = datdoan.mamon "+
-    "and donhang.madon = datdoan.madon "+
-    "and trangthaidonhang.madon = donhang.madon "+
-    "and trangthai.matrangthai = trangthaidonhang.matrangthai "+
-    "and trangthai.tentrangthai = N'Chưa giao hàng' "+
-    "order by donhang.thoigiandat DESC;", nativeQuery = true)
+    "from datdoan "+
+    "inner join donhang on donhang.madon = datdoan.madon " +
+    "inner join doan on doan.mamon = datdoan.mamon " +
+    "inner join trangthaidonhang on trangthaidonhang.madon = donhang.madon " +
+    "where trangthaidonhang.matrangthai = 8 "+
+    "order by donhang.thoigiandat DESC", nativeQuery = true)
     List<DonhangRes> lists();
     
 }

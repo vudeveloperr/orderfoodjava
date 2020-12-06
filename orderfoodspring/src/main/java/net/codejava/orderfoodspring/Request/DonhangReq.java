@@ -1,5 +1,6 @@
 package net.codejava.orderfoodspring.Request;
 
+import java.math.BigInteger;
 
 public interface DonhangReq {
     Integer getMadon();

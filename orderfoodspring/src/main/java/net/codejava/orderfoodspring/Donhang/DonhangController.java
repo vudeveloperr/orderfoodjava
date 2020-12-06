@@ -39,8 +39,6 @@ public class DonhangController {
     @GetMapping("/orders")
     // @PreAuthorize("hasRole('USER')")
     public List<DonhangRes> lists(){
-        System.out.println("hehe");
-        System.out.println(service.getall());
         return service.getall();
     }
 
