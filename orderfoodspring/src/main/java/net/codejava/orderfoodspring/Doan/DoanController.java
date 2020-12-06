@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +65,7 @@ public class DoanController {
 
     // get list view
     @GetMapping("/foods/view")
+    // @PreAuthorize("hasRole('ADMIN')")
     public List<DoanRes> listView(){
         return service.listView();
     }
@@ -106,6 +108,18 @@ public class DoanController {
     }
 
     // get list rand 
-    //@GetMapping("/foods/{num}")
+    @GetMapping("/foods/rand")
+    public List<Doan> rand(@RequestParam(required = true) Optional<Integer> num){
+        return service.listsRand(num.get());
+    }
     
+    @GetMapping("/foods/search")
+    public List<Doan> search(@RequestParam(required = true) Optional<String> name, @RequestParam Optional<Integer> idtype){
+        if (!idtype.isPresent()){
+            System.out.println("hihi");
+            return service.listsSearch(name.get());
+        }else{
+            return service.listsSearchFillter(name.get(), idtype.get());
+        }  
+    }
 }

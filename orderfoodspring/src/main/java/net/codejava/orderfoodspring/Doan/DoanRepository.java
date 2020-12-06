@@ -14,6 +14,15 @@ public interface DoanRepository extends JpaRepository<Doan, Integer>{
     @Query(value = "Select * from doan order by RAND() limit ?1", nativeQuery = true)
     List<Doan> listsRand(int num);
 
+    @Query(value = "Select * from doan limit ?1", nativeQuery = true)
+    List<Doan> listsLimit(int num);
+
+    @Query(value = "Select * from doan where doan.tenmon LIKE '%' || ?1 || '%'", nativeQuery = true)
+    List<Doan> listsSearch(String name);
+
+    @Query(value = "Select * from doan where maloai = ?2 and tenmon LIKE '%' || ?1 || '%' ", nativeQuery = true)
+    List<Doan> listsSearchFillter(String name, int idtype);
+
     @Query(value = "Select * from doan where maloai = ?2 limit ?1", nativeQuery = true)
     List<Doan> listsFillterType(int num, int idtype);
 

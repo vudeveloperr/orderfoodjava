@@ -34,7 +34,21 @@ public class DoanService {
     }
 
     public List<Doan> lists(int num){
+        return repo.listsLimit(num);
+    }
+
+    public List<Doan> listsRand(int num){
         return repo.listsRand(num);
+    }
+
+    public List<Doan> listsSearch(String name){
+        System.out.println(name);
+        return repo.listsSearch(name);
+    }
+
+    public List<Doan> listsSearchFillter(String name, int idtype){
+        System.out.println("name : "+name+" idtype : "+idtype);
+        return repo.listsSearchFillter(name, idtype);
     }
 
     public List<Doan> listsFillerType(int num, int idtype){
