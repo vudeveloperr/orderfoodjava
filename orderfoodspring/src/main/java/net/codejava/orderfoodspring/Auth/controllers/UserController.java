@@ -52,58 +52,49 @@ public class UserController {
         return service.listAll();
     }
 
-    @GetMapping("/users/{id}")
-    public Optional<User> get(@RequestParam String username) {
-        return service.getbyname(username);
+    @PutMapping("/users/{id}")
+    public ResponseEntity<?> update(@RequestBody UpdateUserRequest userupdate, @PathVariable Integer id){
+        if (userRepository.existsByUsername(userupdate.getUsername())) {
+            Set<String> strRoles = userupdate.getRole();
+            Set<Role> roles = new HashSet<>();
+            if (strRoles == null) {
+                Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                roles.add(userRole);
+            } else {
+                strRoles.forEach(role -> {
+                    switch (role) {
+                        case "admin":
+                            Role adminRole = roleRepository.findByName(ERole.ROLE_USER)
+                                .orElseThrow(() -> new RuntimeException("Error: CAN NOT UPGARADE TO ADMIN_ROLE --> Down to UserRole!!!"));
+                            roles.add(adminRole);
+                            break;
+                        case "mod":
+                            Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            roles.add(modRole);
+    
+                            break;
+                        default:
+                            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            roles.add(userRole);
+                    }
+                });
+            }
+            System.out.println(strRoles.iterator().next());
+            if(strRoles.iterator().next() == "user"){
+                System.out.println("hihi");
+            }
+            userRepository.updateUser(id, userupdate.getUsername(), encoder.encode(userupdate.getPassword()), userupdate.getEmail());
+            // userRepository.updateRoleUser(id, role_id);
+            return new ResponseEntity<UpdateUserRequest>(userupdate, HttpStatus.OK);
+        }else{
+            return ResponseEntity
+                .badRequest()
+                    .body(new MessageResponse("Error: Username is not found!!!"));
+        }
     }
-
-    // @PutMapping("/users/{id}")
-    // public ResponseEntity<?> update(@RequestBody UpdateUserRequest userupdate, @PathVariable Integer id){
-    //     // System.out.println(userRepository.findById(id).toString());
-    //     if (userRepository.existsByUsername(userupdate.getUsername())) {
-    //         Set<String> strRoles = userupdate.getRole();
-    //         Set<Role> roles = new HashSet<>();
-    //         if (strRoles == null) {
-    //             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-    //                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-    //             roles.add(userRole);
-    //         } else {
-    //             strRoles.forEach(role -> {
-    //                 switch (role) {
-    //                     case "admin":
-    //                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-    //                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-    //                         roles.add(adminRole);
-    
-    //                         break;
-    //                     case "mod":
-    //                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-    //                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-    //                         roles.add(modRole);
-    
-    //                         break;
-    //                     default:
-    //                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-    //                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-    //                         roles.add(userRole);
-    //                 }
-    //             });
-    //         }
-    //         System.out.println(id);
-    //         System.out.println(userupdate.getUsername());
-    //         System.out.println(userupdate.getPassword());
-    //         System.out.println(userupdate.getEmail());
-    //         userRepository.updateUser(id, userupdate.getUsername(), encoder.encode(userupdate.getPassword()), userupdate.getEmail());
-    //         // user.setRoles(roles);
-    //         // service.save(user);
-    //         // return new ResponseEntity<User>(user, HttpStatus.OK);
-    //         return new ResponseEntity<UpdateUserRequest>(userupdate, HttpStatus.OK);
-    //     }else{
-    //         return ResponseEntity
-    //             .badRequest()
-    //                 .body(new MessageResponse("Error: Username is not found!!!"));
-    //     }
-    // }
     
     @PutMapping("/user/{id}")
     public ResponseEntity<?> deleterole(@RequestBody User user, @PathVariable Integer id){
