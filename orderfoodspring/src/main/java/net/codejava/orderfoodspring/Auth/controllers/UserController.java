@@ -3,8 +3,11 @@ package net.codejava.orderfoodspring.Auth.controllers;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.websocket.server.PathParam;
 
 import jdk.jfr.internal.Repository;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import net.codejava.orderfoodspring.Auth.payload.response.MessageResponse;
 import org.springframework.http.HttpStatus;
 import net.codejava.orderfoodspring.Auth.security.services.UserDetailsServiceImpl;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +39,7 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     PasswordEncoder encoder;
 
@@ -44,8 +48,13 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
-    public List<User> listuser(){
+    public List<User> listuser() {
         return service.listAll();
+    }
+
+    @GetMapping("/users/{id}")
+    public Optional<User> get(@RequestParam String username) {
+        return service.getbyname(username);
     }
 
     // @PutMapping("/users/{id}")

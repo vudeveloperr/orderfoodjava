@@ -17,7 +17,7 @@ public interface DoanRepository extends JpaRepository<Doan, Integer>{
     @Query(value = "Select * from doan limit ?1", nativeQuery = true)
     List<Doan> listsLimit(int num);
 
-    @Query(value = "Select * from doan where doan.tenmon LIKE '%' || ?1 || '%'", nativeQuery = true)
+    @Query(value = "Select * from doan where UPPER(doan.tenmon) LIKE UPPER('%' || ?1 || '%')", nativeQuery = true)
     List<Doan> listsSearch(String name);
 
     @Query(value = "Select * from doan where maloai = ?2 and tenmon LIKE '%' || ?1 || '%' ", nativeQuery = true)
@@ -31,4 +31,6 @@ public interface DoanRepository extends JpaRepository<Doan, Integer>{
 
     @Query(value = "select tenmon, gia, anh, trangthai from doan", nativeQuery = true)
     List<DoanRes> listView();
+
+    List<Doan> findByTenmonContaining(String tenmon);
 }

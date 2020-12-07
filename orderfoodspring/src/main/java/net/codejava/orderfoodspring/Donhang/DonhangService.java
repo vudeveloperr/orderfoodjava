@@ -17,8 +17,8 @@ public class DonhangService {
         return repo.findAll();
     }
 
-    public void save(Donhang donHang){
-        repo.save(donHang);
+    public Donhang save(Donhang donHang){
+        return repo.save(donHang);
     }
 
     public Donhang get(Integer id){
@@ -28,7 +28,12 @@ public class DonhangService {
     public boolean exists(Integer id){
         return repo.existsById(id);
     }
+    
     public List<DonhangRes> getall(){
         return repo.lists();
+    }
+
+    public void setTongtien(Long t, Integer madon){
+        repo.settongtien(t, madon);
     }
 }

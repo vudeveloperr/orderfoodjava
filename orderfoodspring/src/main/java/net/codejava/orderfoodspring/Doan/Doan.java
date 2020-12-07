@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Doan{
     private Integer mamon;
 	private String tenmon;
-	private Float gia;
+	private Long gia;
     private String anh;
 	private String mota;
 	private String dvt;
@@ -19,7 +19,7 @@ public class Doan{
     public Doan() {
     }
 
-    public Doan(Integer mamon, String tenmon, Float gia, String anh, String mota, String dvt, Integer maloai, String trangthai) {
+    public Doan(Integer mamon, String tenmon, Long gia, String anh, String mota, String dvt, Integer maloai, String trangthai) {
         this.mamon = mamon;
         this.tenmon = tenmon;
         this.gia = gia;
@@ -47,11 +47,11 @@ public class Doan{
         this.tenmon = tenmon;
     }
 
-    public Float getGia() {
+    public Long getGia() {
         return this.gia;
     }
 
-    public void setGia(Float gia) {
+    public void setGia(Long gia) {
         this.gia = gia;
     }
 

@@ -1,7 +1,5 @@
 package net.codejava.orderfoodspring.Donhang;
 
-import java.math.BigInteger;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,22 +8,32 @@ public class Donhang {
     private Integer makhach;
     private String tenkhach;
     private String sdt;
-    private String diachi;
     private Long tongtien;
     private String ghichu;
     private String diachinhan;
-    private BigInteger thoigiannhan;
-    private BigInteger thoigiandat;
+    private Long thoigiannhan;
+    private Long thoigiandat;
 
     public Donhang(){}
 
-    public Donhang(Integer madon, Integer makhach, String tenkhach, String sdt, String diachi, Long tongtien,
-            String ghichu, String diachinhan, BigInteger thoigiannhan, BigInteger thoigiandat) {
+    public Donhang(Integer madon, Integer makhach, String tenkhach, String sdt, Long tongtien,
+            String ghichu, String diachinhan, Long thoigiannhan, Long thoigiandat) {
         this.madon = madon;
         this.makhach = makhach;
         this.tenkhach = tenkhach;
         this.sdt = sdt;
-        this.diachi = diachi;
+        this.tongtien = tongtien;
+        this.ghichu = ghichu;
+        this.diachinhan = diachinhan;
+        this.thoigiannhan = thoigiannhan;
+        this.thoigiandat = thoigiandat;
+    }
+
+    public Donhang(Integer makhach, String tenkhach, String sdt, Long tongtien,
+            String ghichu, String diachinhan, Long thoigiannhan, Long thoigiandat) {
+        this.makhach = makhach;
+        this.tenkhach = tenkhach;
+        this.sdt = sdt;
         this.tongtien = tongtien;
         this.ghichu = ghichu;
         this.diachinhan = diachinhan;
@@ -67,14 +75,6 @@ public class Donhang {
         this.sdt = sdt;
     }
 
-    public String getDiachi() {
-        return diachi;
-    }
-
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
-    }
-
     public Long getTongtien() {
         return tongtien;
     }
@@ -99,19 +99,19 @@ public class Donhang {
         this.diachinhan = diachinhan;
     }
 
-    public BigInteger getThoigiannhan() {
+    public Long getThoigiannhan() {
         return thoigiannhan;
     }
 
-    public void setThoigiannhan(BigInteger thoigiannhan) {
+    public void setThoigiannhan(Long thoigiannhan) {
         this.thoigiannhan = thoigiannhan;
     }
 
-    public BigInteger getThoigiandat() {
+    public Long getThoigiandat() {
         return thoigiandat;
     }
 
-    public void setThoigiandat(BigInteger thoigiandat) {
+    public void setThoigiandat(Long thoigiandat) {
         this.thoigiandat = thoigiandat;
     }
 }

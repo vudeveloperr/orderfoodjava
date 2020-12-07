@@ -1,6 +1,9 @@
 package net.codejava.orderfoodspring.Auth.security.services;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,5 +42,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	public List<User> listAll(){
         return userRepository.findAll();
-    }
+	}
+	
+	public Optional<User> getbyname(String username){
+		return userRepository.findByUsername(username);
+	}
 }

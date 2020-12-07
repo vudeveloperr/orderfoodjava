@@ -43,7 +43,7 @@ public class DoanService {
 
     public List<Doan> listsSearch(String name){
         System.out.println(name);
-        return repo.listsSearch(name);
+        return repo.findByTenmonContaining(name);
     }
 
     public List<Doan> listsSearchFillter(String name, int idtype){
@@ -61,5 +61,9 @@ public class DoanService {
     
     public List<DoanRes> listView(){
         return repo.listView();
+    }
+
+    public Long gia(Integer mamon){
+        return repo.findById(mamon).get().getGia();
     }
 }

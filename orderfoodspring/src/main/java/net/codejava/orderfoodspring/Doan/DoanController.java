@@ -31,6 +31,7 @@ public class DoanController {
 
     // create
     @PostMapping("/foods")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public void add(@RequestBody Doan food) {
         service.save(food);
     }
@@ -91,6 +92,7 @@ public class DoanController {
 
     // edit by id
     @PutMapping("/foods/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?> update(@RequestBody Doan food, @PathVariable Integer id) {
         boolean check = service.exists(id);
         if (check){
@@ -103,6 +105,7 @@ public class DoanController {
 
     // del by id
     @DeleteMapping("/foods/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
