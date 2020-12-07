@@ -37,7 +37,6 @@ public class User{
 
     // @NotBlank
     // private boolean trangthai;
-  
     @ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
@@ -117,6 +116,7 @@ public class User{
     // public void setTrangthai(boolean trangthai) {
     //     this.trangthai = trangthai;
     // }
+
     @ManyToMany
     public Set<Role> getRoles() {
 		return roles;
@@ -125,17 +125,6 @@ public class User{
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
     }
-    
-
-    // public User(String username, String matkhau, String email, String gt, String sdt, Date ngaytao) {
-    //     this.username = username;
-    //     this.password = matkhau;
-    //     this.email = email;
-    //     // this.gt = gt;
-    //     // this.sdt = sdt;
-    //     // this.ngaytao = ngaytao;
-    // }
-   
 
     public User(String username, String matkhau, String email){
         this.username = username;
@@ -145,18 +134,6 @@ public class User{
 
     public User() {
     }
+
     
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", username='" + getUsername() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", email='" + getEmail() + "'" +
-            // ", gt='" + getGt() + "'" +
-            // ", sdt='" + getSdt() + "'" +
-            // ", ngaytao='" + getNgaytao() + "'" +
-            ", roles='" + getRoles() + "'" +
-            "}";
-    }
 }

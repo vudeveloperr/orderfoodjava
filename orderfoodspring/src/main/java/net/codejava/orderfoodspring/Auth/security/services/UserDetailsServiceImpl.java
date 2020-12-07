@@ -1,5 +1,6 @@
 package net.codejava.orderfoodspring.Auth.security.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import net.codejava.orderfoodspring.Auth.models.User;
+import net.codejava.orderfoodspring.Auth.payload.request.UpdateUserRequest;
 import net.codejava.orderfoodspring.Auth.repository.UserRepository;
 import net.codejava.orderfoodspring.Auth.security.WebSecurityConfig;
 
@@ -30,4 +32,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    registry.addResourceHandler("/**")
 	        .addResourceLocations(WebSecurityConfig.CLASSPATH_RESOURCE_LOCATIONS);
 	}
+
+	public void save(User user){
+        userRepository.save(user);
+	}
+	
+	public List<User> listAll(){
+        return userRepository.findAll();
+    }
 }
