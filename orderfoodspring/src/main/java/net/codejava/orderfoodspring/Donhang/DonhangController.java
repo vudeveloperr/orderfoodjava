@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.codejava.orderfoodspring.Datdoan.Datdoan;
+// import net.codejava.orderfoodspring.Doan.Doan;
 import net.codejava.orderfoodspring.Request.DonhangReq;
 import net.codejava.orderfoodspring.Response.DonhangRes;
+// import net.codejava.orderfoodspring.Trangthaidonhang.Trangthaidonhang;
 
 // import javassist.NotFoundException;
 
@@ -26,14 +29,33 @@ public class DonhangController {
 
     @PostMapping("/orders")
     public void add(@RequestBody DonhangReq res) {
+        // Trangthaidonhang trangthaidonhang = new Trangthaidonhang();
         Donhang donhang = new Donhang();
+        Datdoan datdoan = new Datdoan();
+        // Doan doan = new Doan();
+        // trangthaidonhang.setMatrangthai(res.getMatrangthai());
         donhang.setMadon(res.getMadon());
-        donhang.setMakhach(res.getMakhach());
-        service.save(donhang);
+        datdoan.setMamon(res.getMamon());
+        donhang.setMakhach(res.getUserid());
+        // doan.setTenmon(res.getTenmon());
+        // doan.setGia(res.getGia());
+        // doan.setAnh(res.getAnh());
+        // doan.setMota(res.getMota());
+        // doan.setDvt(res.getDvt());
+        // doan.setMaloai(res.getMaloai());
+        // doan.setTrangthai(res.getTrangthai());
+        donhang.setThoigiandat(res.getThoigiandat());
+        donhang.setThoigiannhan(res.getThoigiannhan());
+        donhang.setDiachi(res.getDiachi());
+        donhang.setSdt(res.getSdt());
+        donhang.setTenkhach(res.getTenkhach());
+        // trangthaidonhang.setMatrangthai(res.getMatrangthai());
+        // trangthaidonhang.setNoidung(res.getNoidung());
+        // service.savedonhang();
     }
 
     @GetMapping("/orders")
-    // @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public List<DonhangRes> lists(){
         return service.getall();
     }

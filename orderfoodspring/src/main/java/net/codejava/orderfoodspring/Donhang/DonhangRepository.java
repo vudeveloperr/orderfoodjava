@@ -22,4 +22,9 @@ public interface DonhangRepository extends JpaRepository<Donhang, Integer> {
     "order by donhang.thoigiandat DESC", nativeQuery = true)
     List<DonhangRes> lists();
     
+    
+    @Query(value = "insert into donhang(makhach,thoigiandat,thoigiannhan,diachinhan"+
+    ",ghichu,tongtien,diachi,sdt,tenkhach)"+
+    "values(2,1607131935987,1607131935789,'bac','sdas','1234564','sdasd','asdasd','sdasd')", nativeQuery = true)
+    Integer savedonhangservice();
 }
