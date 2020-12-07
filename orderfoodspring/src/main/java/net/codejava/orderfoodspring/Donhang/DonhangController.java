@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.codejava.orderfoodspring.Request.DonhangReq;
+import net.codejava.orderfoodspring.Response.DonhangRes;
+
+// import javassist.NotFoundException;
 
 @RestController
 public class DonhangController {
@@ -20,25 +25,29 @@ public class DonhangController {
     private DonhangService service;
 
     @PostMapping("/orders")
-    public void add(@RequestBody Donhang donhang) {
+    public void add(@RequestBody DonhangReq res) {
+        Donhang donhang = new Donhang();
+        donhang.setMadon(res.getMadon());
+        donhang.setMakhach(res.getMakhach());
         service.save(donhang);
     }
 
     @GetMapping("/orders")
-    public List<Donhang> list(){
-        return service.listAll();
+    // @PreAuthorize("hasRole('USER')")
+    public List<DonhangRes> lists(){
+        return service.getall();
     }
 
-    @GetMapping("/orders/{id}")
-    public ResponseEntity<?> get(@PathVariable Integer id){
-        boolean check = service.exists(id);
-        if (check){
-            Donhang or = service.get(id);
-            return new ResponseEntity<Donhang>(or, HttpStatus.OK);
-        }else{
-            return null;
-        }
-    }
+    // @GetMapping("/orders/{id}")
+    // public ResponseEntity<?> get(@PathVariable Integer id){
+    //     boolean check = service.exists(id);
+    //     if (check){
+    //         Donhang or = service.get(id);
+    //         return new ResponseEntity<Donhang>(or, HttpStatus.OK);
+    //     }else{
+    //         return null;
+    //     }
+    // }
 
     @PutMapping("/orders/{id}")
     public ResponseEntity<?> update(@RequestBody Donhang donhang, @PathVariable Integer id) {
