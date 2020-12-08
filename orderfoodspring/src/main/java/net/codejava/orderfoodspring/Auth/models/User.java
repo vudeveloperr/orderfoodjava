@@ -14,28 +14,28 @@ import javax.validation.constraints.Size;
 public class User{
     private Integer id;
 
-    @NotBlank
+    
     private String username;
     
-    @NotBlank
+    
 	@Size(max = 255)
     private String password;
 
-    @NotBlank
+    
 	@Size(max = 250)
 	@Email
     private String email;
 
-    // @NotBlank
+    // 
     // private String gt;
 
-    // @NotBlank
+    // 
     // private String sdt;
 
-    // @NotBlank
+    // 
     // private Date ngaytao;
 
-    // @NotBlank
+    // 
     // private boolean trangthai;
     @ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 

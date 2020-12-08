@@ -97,10 +97,12 @@ public class UserController {
     }
     
     @PutMapping("/user/{id}")
-    public ResponseEntity<?> deleterole(@RequestBody User user, @PathVariable Integer id){
-        if (userRepository.existsByUsername(user.getUsername())) {
-            encoder.encode(user.getPassword());
-            service.save(user);
+    public ResponseEntity<?> deleterole( @PathVariable Integer id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            User u = user.get();
+            u.setRoles(new HashSet());
+            service.save(u);
             return new ResponseEntity<>("Success: Delete Role!!!", HttpStatus.OK);
         }else{
             return ResponseEntity
