@@ -1,5 +1,6 @@
 package net.codejava.orderfoodspring.Auth.controllers;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -84,8 +85,8 @@ public class AuthController {
                             encoder.encode(signUpRequest.getPassword()),
                             signUpRequest.getEmail()
                             );
-
-        Set<String> strRoles = signUpRequest.getRole();
+        List<String> str =  Arrays.asList(signUpRequest.getRole());
+        Set<String> strRoles = new HashSet<>(str);
         Set<Role> roles = new HashSet<>();
 
         System.out.println(user.toString());
